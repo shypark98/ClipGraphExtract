@@ -1,0 +1,20 @@
+[submodule "src/OpenDB"]
+	path = src/OpenDB
+	url = https://github.com/The-OpenROAD-Project/OpenDB
+    ignore = dirty
+[submodule "src/flute3"]
+	path = src/flute3
+	url = https://github.com/The-OpenROAD-Project/flute3
+[submodule "src/OpenSTA"]
+	path = src/OpenSTA
+	url = https://github.com/The-OpenROAD-Project/OpenSTA
+    ignore = dirty
+[submodule "src/CImg"]
+	path = src/CImg
+	url = https://github.com/dtschump/CImg.git
+[submodule "src/JKQtPlotter"]
+	path = src/JKQtPlotter
+	url = https://github.com/jkriege2/JKQtPlotter.git
+[submodule "src/tinycolormap"]
+	path = src/tinycolormap
+	url = https://github.com/yuki-koyama/tinycolormap.git

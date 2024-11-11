@@ -33,9 +33,8 @@ void Grid::init() {
 
 
     cout << "Grid (" << numCols_ << " x " << numRows_ << ")" << endl;
-
     // init gcell
-
+    
     //for(x1=0; x1 < bbox_.xMax()-gcellWidth_; x1+= gcellWidth_) {
         //for(y1=0; y1 < bbox_.yMax()-gcellHeight_; y1+=gcellHeight_) {
     int x1, y1, x2, y2;
@@ -63,7 +62,7 @@ void Grid::init() {
     for(dbNet* net : db_->getChip()->getBlock()->getNets()) {
         createRSMT(net);
     }
-
+    
     measure.stop_clock("grid init phase2");
     measure.print_clock();
 }

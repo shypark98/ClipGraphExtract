@@ -290,7 +290,7 @@ add_flex_bison_dependency(SdfLex SdfParser)
 
 ################################################################
 
-find_package(SWIG)# REQUIRED 3.0)
+#find_package(SWIG REQUIRED 3.0)
 include(UseSWIG)
 
 set(STA_SWIG_FILE app/StaApp.i)

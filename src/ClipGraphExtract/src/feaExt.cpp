@@ -151,14 +151,15 @@ void initWireRtree(odb::dbDatabase* db,
                 int yMin = sbox->yMin();
                 int yMax = sbox->yMax();
 
-                if (sbox->isVia()){
-                    dbTechVia* via = sbox->getTechVia();
-                    int routingLevel = via->getBottomLayer()->getRoutingLevel();
+                //if (sbox->isVia()){
+                //    dbTechVia* via = sbox->getTechVia();
+                //    int routingLevel = via->getBottomLayer()->getRoutingLevel();
                     
-                    bgBox viaBox( bgPoint(xMin, yMin), bgPoint(xMax, yMax) );
-                    sviaRtreeMap[routingLevel].insert( make_pair( viaBox, via ) );
-                }
-                else {
+                //    bgBox viaBox( bgPoint(xMin, yMin), bgPoint(xMax, yMax) );
+                //    sviaRtreeMap[routingLevel].insert( make_pair( viaBox, via ) );
+                //}
+                //else {
+                if (!sbox->isVia()){
                     dbTechLayer* layer = sbox->getTechLayer();
                     int routingLevel = layer->getRoutingLevel();
 
@@ -167,7 +168,7 @@ void initWireRtree(odb::dbDatabase* db,
                 }
             }
         }
-    } 
+    }
 }
 
 
@@ -194,14 +195,15 @@ void initPWireRtree(odb::dbDatabase* db,
                         int yMin = sbox->yMin();
                         int yMax = sbox->yMax();
 
-                        if (sbox->isVia()){
-                            dbTechVia* via = sbox->getTechVia();
-                            int routingLevel = via->getBottomLayer()->getRoutingLevel();
+                        //if (sbox->isVia()){
+                        //    dbTechVia* via = sbox->getTechVia();
+                        //    int routingLevel = via->getBottomLayer()->getRoutingLevel();
                             
-                            bgBox viaBox( bgPoint(xMin, yMin), bgPoint(xMax, yMax) );
-                            pviaRtreeMap[routingLevel].insert( make_pair( viaBox, via ) );
-                        }
-                        else {
+                        //    bgBox viaBox( bgPoint(xMin, yMin), bgPoint(xMax, yMax) );
+                        //    pviaRtreeMap[routingLevel].insert( make_pair( viaBox, via ) );
+                        //}
+                        //else {
+                        if (!sbox->isVia()){
                             dbTechLayer* layer = sbox->getTechLayer();
                             int routingLevel = layer->getRoutingLevel();
 
@@ -246,11 +248,10 @@ void getTimingInfo(dbDatabase* db_, sta::dbSta* sta_,
         unordered_map<dbInst*, double> &absSlack_, 
         unordered_map<dbInst*, double> &relSlack_, 
         unordered_map<dbInst*, bool> &isCritical_) {
-
+    
     sta_->updateTiming(false);
     sta::dbNetwork* network = sta_->getDbNetwork();
     sta::Graph* graph = sta_->ensureGraph();
-
     sta::Vertex* wstVertex;
     sta::Slack wstSlack, totNegSlack;
     sta_->worstSlack(sta::MinMax::max(), wstSlack, wstVertex);
@@ -355,7 +356,6 @@ void ClipGraphExtractor::init() {
         }
     }
 
-
     Rect blockArea;
     block->getDieArea(blockArea);
     cout << "Die area"
@@ -364,7 +364,7 @@ void ClipGraphExtractor::init() {
     cout << "TotalTrackSupply    : " << totalTrackSupply << endl;
     cout << "TotalWireCapacity   : " << totalWireCapacity << endl;
     // Get core area
-
+    
     measure.stop_clock("init phase1");
 
     // Initialize Gcell Grid
@@ -399,7 +399,7 @@ void ClipGraphExtractor::init() {
 
 
 void ClipGraphExtractor::extract() {
-
+    
     Grid* grid = (Grid*)grid_;
 
     dbBlock* block = db_->getChip()->getBlock();
@@ -410,7 +410,7 @@ void ClipGraphExtractor::extract() {
 
     set<dbNet*> findNet;
     dbSet<dbITerm> iterms = block->getITerms();
-
+    
     // Init Rtrees
     unordered_map<int, SegRtree<dbNet*>> rWireRtreeMap;
     unordered_map<int, BoxRtree<dbTechVia*>> rViaRtreeMap;
@@ -426,7 +426,7 @@ void ClipGraphExtractor::extract() {
     SegRtree<RSMT*> rsmtRtree;
     
     initWireRtree(db_, rWireRtreeMap, sWireRtreeMap, rViaRtreeMap, sViaRtreeMap);
-    initPWireRtree(db_, pWireRtreeMap, pViaRtreeMap);
+    //initPWireRtree(db_, pWireRtreeMap, pViaRtreeMap);
     initInstRtree(db_, instRtree);
     initGcellRtree((Grid*)grid_, gcellRtree);
     initRsmtRtree((Grid*)grid_, rsmtRtree);

@@ -112,10 +112,10 @@ void ClipGraphExtractor::parseDrcReport_(const char* fileName) {
             numDrvs++;
             string delim = " (),";
             vector<string> tokens = splitAsTokens(m[0].str(), delim);
-            int lx = dbu * atof(tokens[1].c_str());
-            int ly = dbu * atof(tokens[2].c_str());
-            int ux = dbu * atof(tokens[3].c_str());
-            int uy = dbu * atof(tokens[4].c_str());
+            int lx = dbu * atof(tokens[0].c_str());
+            int ly = dbu * atof(tokens[1].c_str());
+            int ux = dbu * atof(tokens[2].c_str());
+            int uy = dbu * atof(tokens[3].c_str());
             // TODO
             Marker* mark = grid->createMarker(lx,ly,ux,uy);
             rtree.insert(make_pair(mark->getQueryBox(), mark));

@@ -39,7 +39,7 @@ add_subdirectory(src/tm)
 ################################# SWIG #####################################
 ############################################################################
 
-find_package(SWIG)# REQUIRED 3.0)
+#find_package(SWIG REQUIRED 3.0)
 
 include(${SWIG_USE_FILE})
 
